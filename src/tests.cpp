@@ -16,6 +16,7 @@
 /// Verify area() is pi, 4 and 6 (compare doubles with std::fabs(a - b) < 1e-9).
 void test_shape_areas(void)
 {
+    Shape* circ = new Circle(1);
     TEST_ASSERT_TRUE_MESSAGE(0, "TODO: Implement this test");
 }
 

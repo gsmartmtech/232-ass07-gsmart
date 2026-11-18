@@ -26,59 +26,54 @@ bool Shape::operator<(const Shape &other) const
 /// Constructor with a member initializer list.
 Circle::Circle(double newRadius)
 {
-    this->radius = newRadius;
+   radius = newRadius;
 }
 
 /// pi * radius * radius, use std::numbers::pi
 double Circle::area() const
 {
-    double pi = std::numbers::pi;
     return std::numbers::pi * this->radius * this->radius;
 }
 
 /// Return exactly "Circle".
 std::string Circle::name() const
 {
-    // TODO: implement
-    return "";
+    return "Circle";
 }
 
 Square::Square(double newSide)
 {
-    // TODO: initializer list
+    side = newSide;
 }
 
 /// side * side
 double Square::area() const
 {
-    // TODO: implement
-    return 0.0;
+    return this->side * this->side;
 }
 
 /// Return exactly "Square".
 std::string Square::name() const
 {
-    // TODO: implement
-    return "";
+    return "Square";
 }
 
 Rectangle::Rectangle(double newWidth, double newHeight)
 {
-    // TODO: initializer list
+    width = newWidth;
+    height = newHeight;
 }
 
 /// width * height
 double Rectangle::area() const
 {
-    // TODO: implement
-    return 0.0;
+    return this->width * this->height;
 }
 
 /// Return exactly "Rectangle".
 std::string Rectangle::name() const
 {
-    // TODO: implement
-    return "";
+    return "Rectangle";
 }
 
 // ============================================================
