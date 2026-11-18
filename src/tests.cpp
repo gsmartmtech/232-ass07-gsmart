@@ -17,7 +17,17 @@
 void test_shape_areas(void)
 {
     Shape* circ = new Circle(1);
-    TEST_ASSERT_TRUE_MESSAGE(0, "TODO: Implement this test");
+    Shape* squa = new Square(2);
+    Shape* rect = new Rectangle(2, 3);
+    bool circRes = fabs(std::numbers::pi - circ->area()) < 1e-9;
+    bool squaRes = fabs(4 - squa->area()) < 1e-9;
+    bool rectRes = fabs(6 - rect->area()) < 1e-9;
+    TEST_ASSERT_TRUE_MESSAGE(circRes, "area did not equal pi");
+    TEST_ASSERT_TRUE_MESSAGE(squaRes, "area did not equal 4");
+    TEST_ASSERT_TRUE_MESSAGE(rectRes, "area did not equal 6");
+    circ->~Shape();
+    squa->~Shape();
+    rect->~Shape();
 }
 
 /// Create an array of three Shape* (a Circle, a Square, a Rectangle) with new.
@@ -25,21 +35,46 @@ void test_shape_areas(void)
 /// Delete the shapes through the base pointers.
 void test_shape_names_through_base_pointer(void)
 {
-    TEST_ASSERT_TRUE_MESSAGE(0, "TODO: Implement this test");
+    Shape* arr[3] = { new Circle(1), new Square(2), new Rectangle(1, 8) };
+    Shape& circRef = *arr[0];
+    Shape& squaRef = *arr[1];
+    Shape& rectRef = *arr[2];
+
+    TEST_ASSERT_TRUE_MESSAGE(circRef.name() == "Circle", "name was not 'Circle'");
+    TEST_ASSERT_TRUE_MESSAGE(squaRef.name() == "Square", "name was not 'Square'");
+    TEST_ASSERT_TRUE_MESSAGE(rectRef.name() == "Rectangle", "name was not 'Rectangle'");
+    arr[0]->~Shape();
+    arr[1]->~Shape();
+    arr[2]->~Shape();
 }
 
 /// Create Square(1) and Square(2). Take two const Shape& to them.
 /// Verify small < big is true, big < small is false, small < small is false.
 void test_shape_operator_less(void)
 {
-    TEST_ASSERT_TRUE_MESSAGE(0, "TODO: Implement this test");
+    Shape* sq1 = new Square(1);
+    Shape* sq2 = new Square(2);
+    const Shape& small = *sq1;
+    const Shape& big = *sq2;
+    TEST_ASSERT_TRUE_MESSAGE(small < big, "small was not less than big");
+    TEST_ASSERT_TRUE_MESSAGE((big < small == false), "big was not greater than small");
+    TEST_ASSERT_TRUE_MESSAGE((small < small == false), "small considered less than itself");
+    sq1->~Shape();
+    sq2->~Shape();
 }
 
 /// Create Square(2) and Rectangle(1, 4): both have area 4.
 /// Verify that NEITHER a < b NOR b < a is true.
 void test_shape_equal_area_not_less(void)
 {
-    TEST_ASSERT_TRUE_MESSAGE(0, "TODO: Implement this test");
+    Shape* sq1 = new Square(1);
+    Shape* sq2 = new Square(2);
+    const Shape& s1Ref = *sq1;
+    const Shape& s2Ref = *sq2;
+    TEST_ASSERT_TRUE_MESSAGE(s1Ref < s2Ref, "sq1 was larger than sq2");
+    TEST_ASSERT_TRUE_MESSAGE(s1Ref < s2Ref, "sq2 was smaller than sq1");
+    sq1->~Shape();
+    sq2->~Shape();
 }
 
 // ============================================================

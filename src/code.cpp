@@ -32,13 +32,14 @@ Circle::Circle(double newRadius)
 /// pi * radius * radius, use std::numbers::pi
 double Circle::area() const
 {
-    return std::numbers::pi * this->radius * this->radius;
+    double result = std::numbers::pi * this->radius * this->radius;
+    return result;
 }
 
 /// Return exactly "Circle".
 std::string Circle::name() const
 {
-    return "Circle";
+    return std::string("Circle");
 }
 
 Square::Square(double newSide)
@@ -49,13 +50,14 @@ Square::Square(double newSide)
 /// side * side
 double Square::area() const
 {
-    return this->side * this->side;
+    double result = this->side * this->side;
+    return result;
 }
 
 /// Return exactly "Square".
 std::string Square::name() const
 {
-    return "Square";
+    return std::string("Square");
 }
 
 Rectangle::Rectangle(double newWidth, double newHeight)
@@ -67,13 +69,14 @@ Rectangle::Rectangle(double newWidth, double newHeight)
 /// width * height
 double Rectangle::area() const
 {
-    return this->width * this->height;
+    double result = this->width * this->height;
+    return result;
 }
 
 /// Return exactly "Rectangle".
 std::string Rectangle::name() const
 {
-    return "Rectangle";
+    return std::string("Rectangle");
 }
 
 // ============================================================
