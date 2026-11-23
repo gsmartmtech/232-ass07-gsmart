@@ -126,7 +126,7 @@ int ShapeList::printList() const
 }
 
 /// area() of the shape at index, or std::nullopt if index is out of range.
-/// Hint: std::next(data.begin(), index)
+/// Hint: std::next(data.begin(), index) // should not return null
 std::optional<double> ShapeList::areaAt(int index) const
 {
     // TODO: implement
@@ -134,7 +134,7 @@ std::optional<double> ShapeList::areaAt(int index) const
 }
 
 /// name() of the shape at index, or std::nullopt if index is out of range.
-std::optional<std::string> ShapeList::nameAt(int index) const
+std::optional<std::string> ShapeList::nameAt(int index) const //whole implementation must be done cause segmention fault will occur otherwise
 {
     // TODO: implement
     return std::nullopt;
