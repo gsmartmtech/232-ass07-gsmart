@@ -86,7 +86,7 @@ void test_shape_equal_area_not_less(void)
 /// (Do NOT delete the shapes yourself: the list owns them.)
 void test_list_add_and_length(void)
 {
-    ShapeList* shapeList = {};
+    ShapeList* shapeList = new ShapeList;
     int resC = shapeList->addShape(new Circle(1));
     int resS = shapeList->addShape(new Square(2));
     TEST_ASSERT_EQUAL(0, resC);
@@ -99,7 +99,7 @@ void test_list_add_and_length(void)
 /// Verify it returns -1 and length() stays 0.
 void test_list_add_null_guard(void)
 {
-    ShapeList* shapeList = {};
+    ShapeList* shapeList = new ShapeList;
     int resNull = shapeList->addShape(nullptr);
     int length = shapeList->length();
     TEST_ASSERT_EQUAL(-1, resNull);
@@ -111,7 +111,36 @@ void test_list_add_null_guard(void)
 /// "Circle", "Square", "Rectangle" and isSorted() is true.
 void test_insertionSort_orders_by_area(void)
 {
-    TEST_ASSERT_TRUE_MESSAGE(0, "TODO: Implement this test");
+    ShapeList* shapeList = new ShapeList;
+    shapeList->addShape(new Rectangle(2, 5));
+    shapeList->addShape(new Circle(1));
+    shapeList->addShape(new Square(2));
+
+    shapeList->insertionSort();
+
+    std::optional<std::string> circRes = shapeList->nameAt(0);
+    std::string circString;
+    if (circRes.has_value())
+    {
+        circString = circRes.value();
+    }
+    std::optional<std::string> squareRes = shapeList->nameAt(1);
+    std::string squareString;
+    if (squareRes.has_value())
+    {
+        squareString = squareRes.value();
+    }
+    std::optional<std::string> rectRes = shapeList->nameAt(2);
+    std::string rectString;
+    if (rectRes.has_value())
+    {
+        rectString = rectRes.value();
+    }
+
+    TEST_ASSERT_EQUAL_STRING("Circle", circString.c_str());
+    TEST_ASSERT_EQUAL_STRING("Square", squareString.c_str());
+    TEST_ASSERT_EQUAL_STRING("Rectangle", rectString.c_str());
+
 }
 
 /// Call insertionSort() on an EMPTY list: no crash, length() is 0.

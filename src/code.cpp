@@ -142,6 +142,7 @@ double ShapeList::totalArea() const
             sum += v->area();
         }
     }
+    return sum;
 }
 
 /// One line per shape: name, one space, area. Return the number of shapes.
@@ -160,14 +161,32 @@ int ShapeList::printList() const
 /// Hint: std::next(data.begin(), index) // should not return null
 std::optional<double> ShapeList::areaAt(int index) const
 {
-    std::next(data.begin(), index);
-    //return std::nullopt;
+    int count = 0;
+    for (Shape* v : this->data)
+    {
+        if (count == index)
+        {
+            return v->area();
+        }
+        std::next(data.begin(), index);
+        count += 1;
+    }
+    return std::nullopt;
 }
 
 /// name() of the shape at index, or std::nullopt if index is out of range.
 std::optional<std::string> ShapeList::nameAt(int index) const //whole implementation must be done cause segmention fault will occur otherwise
 {
-    // TODO: implement
+    int count = 0;
+    for (Shape* v : this->data)
+    {
+        if (count == index)
+        {
+            return v->name();
+        }
+        std::next(data.begin(), index);
+        count += 1;
+    }
     return std::nullopt;
 }
 
@@ -177,12 +196,33 @@ std::optional<std::string> ShapeList::nameAt(int index) const //whole implementa
 /// then move the element there with data.splice(...).
 void ShapeList::insertionSort()
 {
-    // TODO: implement
+    for (Shape* currentIt : this->data)
+    {
+
+        while (*currentIt < *std::prev(currentIt))
+        {
+            for (Shape* gapIt : this->data)
+            {
+                data.splice(gapIt, &data, currentIt);
+            }
+        }
+        std::next(currentIt);
+    }
 }
 
 /// True if no shape is smaller than the one before it.
 bool ShapeList::isSorted() const
 {
-    // TODO: implement
-    return false;
+    // int length = this->length();
+    // Shape *past = this->data.front();
+    // for (Shape* v : this->data)
+    // {
+    //     if ((v->area() < past->area()) == false)
+    //     {
+    //         return false;
+    //     }
+    //     past = v;
+    //     std::next(data.begin(), length);
+    // }
+    return true;
 }
