@@ -86,14 +86,24 @@ void test_shape_equal_area_not_less(void)
 /// (Do NOT delete the shapes yourself: the list owns them.)
 void test_list_add_and_length(void)
 {
-    TEST_ASSERT_TRUE_MESSAGE(0, "TODO: Implement this test");
+    ShapeList* shapeList = {};
+    int resC = shapeList->addShape(new Circle(1));
+    int resS = shapeList->addShape(new Square(2));
+    TEST_ASSERT_EQUAL(0, resC);
+    TEST_ASSERT_EQUAL(0, resS);
+    int length = shapeList->length();
+    TEST_ASSERT_EQUAL(2, length);
 }
 
 /// Create a ShapeList. Call addShape(nullptr).
 /// Verify it returns -1 and length() stays 0.
 void test_list_add_null_guard(void)
 {
-    TEST_ASSERT_TRUE_MESSAGE(0, "TODO: Implement this test");
+    ShapeList* shapeList = {};
+    int resNull = shapeList->addShape(nullptr);
+    int length = shapeList->length();
+    TEST_ASSERT_EQUAL(-1, resNull);
+    TEST_ASSERT_EQUAL(0, length);
 }
 
 /// Add Rectangle(2, 5) (area 10), Circle(1) (area 3.14), Square(2) (area 4).

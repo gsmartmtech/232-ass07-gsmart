@@ -86,42 +86,73 @@ std::string Rectangle::name() const
 /// RAII: delete EVERY shape, then clear the list.
 ShapeList::~ShapeList()
 {
-    // TODO: implement
+    while(this->length() > 0)
+    {
+        this->removeFirst();
+    }
 }
 
 /// Append at the end. Return -1 if newShapePtr is nullptr, 0 on success.
 int ShapeList::addShape(Shape *newShapePtr)
 {
-    // TODO: implement
-    return -1;
+    if (newShapePtr == nullptr)
+    {
+        return -1;
+    }
+    else
+    {
+        this->data.push_back(newShapePtr);
+        return 0;
+    }
 }
 
 /// Delete the first shape and remove it from the list.
 /// Return false if the list is empty, true otherwise.
 bool ShapeList::removeFirst()
 {
-    // TODO: implement
-    return false;
+    if (this->data.empty() == true)
+    {
+        return false;
+    }
+    else
+    {
+        this->data.pop_front();
+        return true;
+    }
 }
 
 /// Number of shapes in the list.
 int ShapeList::length() const
 {
-    // TODO: implement
-    return 0;
+    return static_cast<int>(this->data.size());
 }
 
 /// Sum of area() of all shapes (0.0 if empty).
 double ShapeList::totalArea() const
 {
-    // TODO: implement
-    return 0.0;
+    double sum = 0.0;
+    if (this->data.empty() == true)
+    {
+        return 0.0;
+    }
+    else
+    {
+        for (Shape* v: this->data)
+        {
+            sum += v->area();
+        }
+    }
 }
 
 /// One line per shape: name, one space, area. Return the number of shapes.
 int ShapeList::printList() const
 {
-    // TODO: implement
+    int count = 0;
+    for (Shape* v: this->data)
+    {
+        std::cout << v->name() << " " << v->area() << '\n';
+        count += 1;
+    }
     return 0;
 }
 
@@ -129,8 +160,8 @@ int ShapeList::printList() const
 /// Hint: std::next(data.begin(), index) // should not return null
 std::optional<double> ShapeList::areaAt(int index) const
 {
-    // TODO: implement
-    return std::nullopt;
+    std::next(data.begin(), index);
+    //return std::nullopt;
 }
 
 /// name() of the shape at index, or std::nullopt if index is out of range.
