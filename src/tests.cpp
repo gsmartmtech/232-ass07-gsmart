@@ -137,15 +137,31 @@ void test_insertionSort_orders_by_area(void)
         rectString = rectRes.value();
     }
 
-    TEST_ASSERT_EQUAL_STRING("Circle", circString.c_str());
-    TEST_ASSERT_EQUAL_STRING("Square", squareString.c_str());
-    TEST_ASSERT_EQUAL_STRING("Rectangle", rectString.c_str());
+    std::string circAns = "Circle";
+    std::string squareAns = "Square";
+    std::string rectAns = "Rectangle";
 
+    TEST_ASSERT_EQUAL_STRING(circAns.c_str(), circString.c_str());
+    TEST_ASSERT_EQUAL_STRING(squareAns.c_str(), squareString.c_str());
+    TEST_ASSERT_EQUAL_STRING(rectAns.c_str(), rectString.c_str());
 }
 
 /// Call insertionSort() on an EMPTY list: no crash, length() is 0.
 /// Then add ONE shape and sort again: length() is 1 and nameAt(0) is unchanged.
 void test_insertionSort_empty_and_single(void)
 {
-    TEST_ASSERT_TRUE_MESSAGE(0, "TODO: Implement this test");
+    ShapeList* shapeList = new ShapeList;
+    shapeList->insertionSort();
+
+    shapeList->addShape(new Circle(1));
+    shapeList->insertionSort();
+    std::optional<std::string> circRes = shapeList->nameAt(0);
+    std::string circString;
+    if (circRes.has_value())
+    {
+        circString = circRes.value();
+    }
+    std::string circAns = "Circle";
+    TEST_ASSERT_EQUAL_STRING(circAns.c_str(), circString.c_str());
+    TEST_ASSERT_EQUAL(1, shapeList->length());
 }

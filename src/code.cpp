@@ -196,33 +196,36 @@ std::optional<std::string> ShapeList::nameAt(int index) const //whole implementa
 /// then move the element there with data.splice(...).
 void ShapeList::insertionSort()
 {
-    for (Shape* currentIt : this->data)
+    if (this->length() != 0)
     {
-
-        while (*currentIt < *std::prev(currentIt))
+        for (auto currentIt = this->data.begin(); currentIt != this->data.end(); ++currentIt)
         {
-            for (Shape* gapIt : this->data)
+            auto key = *currentIt;
+            
+            auto gapIt = this->data.begin();
+            while (gapIt != currentIt && key->area() < (*gapIt)->area())
             {
-                data.splice(gapIt, &data, currentIt);
+                gapIt++;
             }
+            data.splice(gapIt, data, currentIt);
         }
-        std::next(currentIt);
+        // sorts in reverse
+        data.reverse();
     }
 }
 
 /// True if no shape is smaller than the one before it.
 bool ShapeList::isSorted() const
 {
-    // int length = this->length();
-    // Shape *past = this->data.front();
-    // for (Shape* v : this->data)
-    // {
-    //     if ((v->area() < past->area()) == false)
-    //     {
-    //         return false;
-    //     }
-    //     past = v;
-    //     std::next(data.begin(), length);
-    // }
+    auto currentIt = data.begin();
+    for (int count = 0; count < this->length(); ++count)
+    {
+        auto gapIt = std::prev(currentIt);
+        if ((*currentIt)->area() < (*gapIt)->area())
+        {
+            return false;
+        }
+        currentIt = std::next(currentIt);
+    }
     return true;
 }
