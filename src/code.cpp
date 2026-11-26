@@ -116,6 +116,8 @@ bool ShapeList::removeFirst()
     }
     else
     {
+        Shape* first = (*this->data.begin());
+        first->~Shape();
         this->data.pop_front();
         return true;
     }
@@ -154,7 +156,7 @@ int ShapeList::printList() const
         std::cout << v->name() << " " << v->area() << '\n';
         count += 1;
     }
-    return 0;
+    return count;
 }
 
 /// area() of the shape at index, or std::nullopt if index is out of range.
