@@ -200,19 +200,28 @@ void ShapeList::insertionSort()
 {
     if (this->length() != 0)
     {
-        for (auto currentIt = this->data.begin(); currentIt != this->data.end(); ++currentIt)
+        auto currentIt = this->data.begin();
+        currentIt++;
+        while (currentIt != this->data.end())
         {
             auto key = *currentIt;
-            
-            auto gapIt = this->data.begin();
-            while (gapIt != currentIt && key->area() < (*gapIt)->area())
+            auto gapIt = currentIt;
+            gapIt--;
+            bool areaLess = key->area() < (*gapIt)->area();
+            if (areaLess)
             {
-                gapIt++;
+                while (gapIt != this->data.begin() && areaLess)
+                {
+                    gapIt--;
+                    if (gapIt != this->data.begin())
+                    {
+                        areaLess = key->area() < (*gapIt)->area();
+                    }
+                }
+                data.splice(gapIt, data, currentIt);
             }
-            data.splice(gapIt, data, currentIt);
+            currentIt++;
         }
-        // sorts in reverse
-        data.reverse();
     }
 }
 
