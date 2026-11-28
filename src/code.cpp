@@ -204,10 +204,9 @@ void ShapeList::insertionSort()
         currentIt++;
         while (currentIt != this->data.end())
         {
-            auto key = *currentIt;
             auto gapIt = currentIt;
             gapIt--;
-            bool areaLess = key->area() < (*gapIt)->area();
+            bool areaLess = (*currentIt)->area() < (*gapIt)->area();
             if (areaLess)
             {
                 while (gapIt != this->data.begin() && areaLess)
@@ -215,7 +214,7 @@ void ShapeList::insertionSort()
                     gapIt--;
                     if (gapIt != this->data.begin())
                     {
-                        areaLess = key->area() < (*gapIt)->area();
+                        areaLess = (*currentIt)->area() < (*gapIt)->area();
                     }
                 }
                 data.splice(gapIt, data, currentIt);
