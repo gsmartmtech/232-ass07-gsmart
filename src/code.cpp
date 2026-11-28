@@ -200,9 +200,7 @@ void ShapeList::insertionSort()
 {
     if (this->length() != 0)
     {
-        auto currentIt = this->data.begin();
-        currentIt++;
-        while (currentIt != this->data.end())
+        for(auto currentIt = std::next(this->data.begin()); currentIt != this->data.end(); currentIt++)
         {
             auto gapIt = currentIt;
             gapIt--;
@@ -211,15 +209,17 @@ void ShapeList::insertionSort()
             {
                 while (gapIt != this->data.begin() && areaLess)
                 {
-                    gapIt--;
-                    if (gapIt != this->data.begin())
+                    if ((*currentIt)->area() < (*(std::prev(gapIt)))->area())
                     {
-                        areaLess = (*currentIt)->area() < (*gapIt)->area();
+                        gapIt--;
+                    }
+                    else
+                    {
+                        areaLess = false;
                     }
                 }
                 data.splice(gapIt, data, currentIt);
             }
-            currentIt++;
         }
     }
 }
